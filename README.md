@@ -68,5 +68,44 @@ O simplemente seleccionarlo en github, buscar el repositorio y seleccionar si po
     --- git push origin <rama> --- git push (empuja los commits), origin (a donde va dirigido), <rama> (la rama seleccionada)
 - Bajar cambios con el comando 
     --- git pull origin <rama> --- git pull (trae los commits del servidor), origin (de donde), <rama> (de que rama seleccionada)
+## Clase 4
+### Git Remote
+Nos permite gestionar nuestras conexiones
+    --- git remote -v --- Nos permite ver las URLs de nuestro repositorio
+    --- git remote add "apodo" "url" Vincula repositorios locales con los de github
+    --- git remote set-url "apodo" "url" Cambia la url en donde nuestro repositorio esta apuntado
+### Multiples SSH
+Esto nos permite tener acceso si tenemos mas de una cuenta en Github a ditintos repositorios por lo cual es conveniente tener mas llaves SSH para que no se ocasionen choques. Su configuracion se hace con lo siquiente
+    --- ssh-keygen -t ed25519 -C "correo de github" -f ~/.ssh/id_niname ---
+Ademas se crean archivos config para que no choquen las keys
+- Cuenta Personal (la de siempre)
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_ed25519
+- Cuenta del otro correo
+Host github-miname
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_miname
 
+Host: Es el apodo o alias que le pones a la conexion. Es lo que escribes en la terminal despues de git@.
+HostName: Es la direccion real del servidor a donde nos conectamos. Siempre sera github.com
+User: Es el nombre de usuario del sistema remoto. Para GitHub, siempre, siempre es git.
+IdentityFile: Es la ruta exacta hacia la "escalera" (la llave privada) que quieres usar para ese Host especifico.
+
+Para ver si funciona ejecutamos 
+    --- ssh -T git@github-miname ---
+### Git Checkout 
+Comando que nos permite mover el Head principal (nuestra ultima actualizacion) a cualquiera que tengamos esto es funcional porque podemos recuperar archivos antiguos, ver configuraciones, etc
+Para ir atras se ejecuta el comando 
+    --- git checkout "hash de un commit antiguo" ---
+    --- git checkout "rama" ---
+### Detached HEAD
+Somos espectadores en el pasado podemos ver todo, pero no tienes rama.
+Si te vas al presente sin "encarnar" en una rama,tus cambios se pierden en el vacio.
+### Buenas practicas 
+- No trabajar mucho en Detached Head
+- Limpiar el directorio de trabajo 
+- Solo es conveniente para aprender
 
