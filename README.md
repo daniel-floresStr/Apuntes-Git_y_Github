@@ -108,4 +108,38 @@ Si te vas al presente sin "encarnar" en una rama,tus cambios se pierden en el va
 - No trabajar mucho en Detached Head
 - Limpiar el directorio de trabajo 
 - Solo es conveniente para aprender
+## Clase 5
+## Ramas 
+Las ramas son una excelente forma de representación de la creación de versiones alternas del codigo donde tenemos un mejor control en tanto a las modificaciones realizadas en un proyecto, ademas considerando que nuestra rama principal (main) es de donde se producen las demas ramas
+### Git Branch 
+Comando que permite gestionar las ramas que tienen un proyecto a base de distintos comandos como ser :
+- ```git branch ```: Muestra todas las ramas que tenemos en nuestro proyecto y ademas nos muestra el posicionamiento actual mediante un HEAD.
+- ```git branch <rama>```: Crea una rama (tener en cuenta las buenas prácticas) a partir de la rama en el que estemos posicionados.
+- ```git branch -D <rama>```: Comando que elimina la rama. 
+### Git checkout
+Git checkout que ademas de que nos sirve para volver a ver a posiciones anteriores de nuestros commits (viaje en el tiempo) tiene funcionalidades especializadas en ramas como ser los códigos de:
+- ```git checkout <rama>```: Comando para movernos de rama en rama (controlar de que el commit se haya completado).
+- ```git checkout -b <rama>```: Comando que funciona tanto para la creacion de la rama y ademas para el posicionamiento a esta 
+### Git switch
+Git switch es un comando mas especializado en ramas que utiliza estos comandos:
+- ```git switch <rama>```: Realiza un cambio de rama 
+- ```git switch -c <rama>```: Crea la rama y cambia de posicionamiento automaticamente.
+### Git checkout vs Git switch
+La distincion de ambos es que **Git checkout** es un multi-funcionamiento mientras que **Git switch** esta enfocado directamente en ramas, Git switch es una mejor forma de control en cuanto a evitar los errores de confusion de escritura (confusiones entre nombre de ramas y commits).
+### Git flow 
+Es un flujo de trabajo el cual nos permite mantener de manera ordenada y coherente las ramas creadas al momento de hacer un proyecto esto mediante reglas establecidas y consignas permitiendo una mayor comprension entre los colaboradores del proyecto y orden visual
+- **main**: Es la rama creada por defecto y ademas nuestra rama de codigo en produccion (principal).
+- **develop**: Rama creada a base de la principal donde su caracteristica es que se realizan pruebas, o la agregacion de nuevas funcionalidades las cuales todavia no estan validadas pero que pronto seran lanzadas.
+- **Ramas de apoyo**: Permiten la escritura y ayuda en nuestro codigo pueden ser las siguientes:
+    - **feature**: Rama de apoyo que funciona a partir de querer agregar una nueva funcionalidad al proyecto. Nace del Develop y cuando es aprobada se fusiona a este y es eliminada.
+    - **release**: En teoria es donde se realizan las pruebas (QA). Se crean en develop y se fusionan con este o son main.
+    - **hotfix**: Es una rama que funciona como parche para arreglar un bug o algun error no previsto por lo cual este debe nacer explicitamente a partir de la rama **main** y no de un **develop**
+**Tabla resumen**
 
+| Rama | Nacimiento | Fusion | Proposito | Ejemplo |
+|------|------------|--------|-----------|---------|
+| main | De ninguna otra rama (es la principal) | Ninguna | Es la rama puesta en producción | main |
+| develop | main | main | Funcionalidades puestas a prueba con falta de aprobacion | develop |
+| feacture/ | develop | develop | Una funcionalidad específica | feacture/sum-function |
+| release/ | develop | develop o main | Se realizan pruebas y se pule la version final | release/v1.0.0 |
+| hotfix/ | main | main y develop | Arreglar un bug | hotfix/login-authentication-error |
