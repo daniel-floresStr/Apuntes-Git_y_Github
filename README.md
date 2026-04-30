@@ -109,7 +109,7 @@ Si te vas al presente sin "encarnar" en una rama,tus cambios se pierden en el va
 - Limpiar el directorio de trabajo 
 - Solo es conveniente para aprender
 ## Clase 5
-## Ramas 
+### Ramas 
 Las ramas son una excelente forma de representación de la creación de versiones alternas del codigo donde tenemos un mejor control en tanto a las modificaciones realizadas en un proyecto, ademas considerando que nuestra rama principal (main) es de donde se producen las demas ramas
 ### Git Branch 
 Comando que permite gestionar las ramas que tienen un proyecto a base de distintos comandos como ser :
@@ -143,3 +143,16 @@ Es un flujo de trabajo el cual nos permite mantener de manera ordenada y coheren
 | feacture/ | develop | develop | Una funcionalidad específica | feacture/sum-function |
 | release/ | develop | develop o main | Se realizan pruebas y se pule la version final | release/v1.0.0 |
 | hotfix/ | main | main y develop | Arreglar un bug | hotfix/login-authentication-error |
+
+## Clase 6
+### Git merge 
+Git merge nos permite fusionar nuestras ramas creadas (develop, feature/, release/, hostfix/) esto en el sentido de que ya fueron aprobadas las nuevas funcionalidades y se quieran agregar al proyecto general.
+```git merge <rama>```: Fusiona las ramas pero sin hacer un commit antes (un aviso de que se fusionaron las ramas).
+### Flujo de trabajo
+Para realizar correctamente la fusion de ramas se debe hacer la ejecución de los siguientes comandos:
+- ```git checkout develop```: Principalmente moverse a la rama develop para fusionarla con otra rama
+- ```git fetch ```: Permite ver si hubo cambios en la rama o cualquier bifurcación de esta, genera un aviso.
+- ```git pull origin develop```: Permite traer todos los cambios que tiene el repositorio de la maquina para no tener problemas al momento de subirla.
+- ```git merge --no-ff <nombre_rama>```: Comienza la fusion de ramas en donde controlamos y forzamos a hacer un commit a esta acción para informar a todos los colaboradores y nosotros mismos que se hizo una fusion de ramas.
+- ```git branch -D <nombre_rama>```: Eliminamos la rama que fusionamos para evitar que vea ramas innecesarias
+- ```git push origin develop```: Subimos los cambios realizados
