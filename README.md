@@ -156,3 +156,37 @@ Para realizar correctamente la fusion de ramas se debe hacer la ejecución de lo
 - ```git merge --no-ff <nombre_rama>```: Comienza la fusion de ramas en donde controlamos y forzamos a hacer un commit a esta acción para informar a todos los colaboradores y nosotros mismos que se hizo una fusion de ramas.
 - ```git branch -D <nombre_rama>```: Eliminamos la rama que fusionamos para evitar que vea ramas innecesarias
 - ```git push origin develop```: Subimos los cambios realizados
+
+## Clase 7
+### Pull request (PRs)
+El pull request es una forma profesional de trabajar con git, github el cual permite ver quien esta mergeando una rama al proyecto 
+### Creacion 
+Para la creacion de este hay que seguir estos pasos
+- Dirigirse a la cuenta de github
+- Ir a ajustes
+- Buscar la opcion de rulesets 
+- Darle un nombre 
+- Configurar a que rama se puede mergear (en este caso develop) 
+- Configurar cuantos colaboradores son necesarios para autorizar que se haga un merge
+- Seleccionar add rulesets
+- Seleccionar add tarjet
+### Flujo de trabajo con pull request 
+El flujo para un correcto trabajo es el siguiente (Comandos usados anteriormente).
+- ```git checkout develop```
+- ```git fetch```
+- ```git pull origin develop```
+- ```git checkout <rama>``` Agregas -b si estás creando la rama
+- ```git merge develop``` Solo si hubo cambios en develop
+Trabajas en tu rama
+- ```git push origin <rama>``` Agregas -u si es la primera vez que subes cambios al repositorio remoto
+- ```git checkout develop```
+- ```git fetch```
+- ```git checkout <rama>```
+- ```git merge develop``` Solo si hubo cambios en develop antes de hacer la Pull Request
+Resuelves manualmente los archivos fallidos y sus conflictos
+- ```git add .```
+- ```git commit```
+- ```git push origin <rama>```
+**¿Porque hacemos esto?**
+Esto lo hacemos para mantener un control en lo que es la modificacion de nuestro proyecto ya que solo con estas restricciones no cualquier persona puede realizar un merge en nuestra rama principal, ya que hay la posibilidad de que pueda meter codigo malicioso o directamente destruir nuestro proyecto. A la existencia de ese riesgo se implementa estas configuraciones que solo si con la autorizacion de los colaboradores pueda realizar un merge
+Ademas tomar en cuenta de que hay una posibilidad de que un no colaborador externo pueda agregar alguna modificacion en el proyecto pero con esta configuracion podemos observar y ademas permitir o denegar las modificaciones (cumpliendo las condiciones de los colaboradores a confirmar) que realiza el intruso. **Dato curioso:** Solo es aceptado las modificaciones cuando se hayan aprobado esas condiciones y si es que uno de ellos lo denego no se podra realizar ningun cambio.
