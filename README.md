@@ -187,6 +187,51 @@ Resuelves manualmente los archivos fallidos y sus conflictos
 - ```git add .```
 - ```git commit```
 - ```git push origin <rama>```
+
 **¿Porque hacemos esto?**
 Esto lo hacemos para mantener un control en lo que es la modificacion de nuestro proyecto ya que solo con estas restricciones no cualquier persona puede realizar un merge en nuestra rama principal, ya que hay la posibilidad de que pueda meter codigo malicioso o directamente destruir nuestro proyecto. A la existencia de ese riesgo se implementa estas configuraciones que solo si con la autorizacion de los colaboradores pueda realizar un merge
 Ademas tomar en cuenta de que hay una posibilidad de que un no colaborador externo pueda agregar alguna modificacion en el proyecto pero con esta configuracion podemos observar y ademas permitir o denegar las modificaciones (cumpliendo las condiciones de los colaboradores a confirmar) que realiza el intruso. **Dato curioso:** Solo es aceptado las modificaciones cuando se hayan aprobado esas condiciones y si es que uno de ellos lo denego no se podra realizar ningun cambio.
+## Clase 8 (Final)
+### ¿Qué hacer cuando se aprobó un Pull Request que afecta archivos que yo estoy tocando?
+Cuando los cambios de un compañero se integran a la rama principal (main) y entran en conflicto con tu trabajo local, debes seguir estos pasos para mantener tu rama actualizada:
+
+1. **Guardar cambios locales:** Si no estás listo para un commit, usa git stash.
+2. **Actualizar rama principal:**
+   - ```git checkout main```
+   - ```git pull origin main```
+3. Integrar cambios a tu rama: Regresa a tu rama y realiza un merge.
+   - ```git checkout tu-rama```
+   - ```git merge main```
+4. Resolver conflictos: Git marcará los archivos en conflicto. Debes editarlos, elegir qué cambios conservar, y luego hacer:
+   - ```git add .```
+   - ```git commit -m "Fix: resolver conflictos con main"```
+## Git Stash: Almacenamiento Temporal
+El comando stash permite guardar provisionalmente los cambios del área de trabajo para tener un directorio limpio sin necesidad de hacer un commit incompleto.
+- ```git stash```: Guarda los cambios modificados (no guardados en commit) y limpia el directorio de trabajo.
+- ```git stash -m "mensaje"```: Permite añadir una descripción al stash.
+- ```git stash list```: Muestra la lista de todos los estados guardados en el historial de stash.
+- ```git stash pop```: Recupera el último stash guardado, lo aplica a tu rama actual y lo elimina de la lista de stashes.
+## Git Diff: Inspección de Cambios
+|Comando|Descripción|
+|-------|------------|
+|git diff|Muestra cambios en el directorio de trabajo que aún no han sido agregados al index (stage).|
+|git diff .	|Muestra todos los cambios en el directorio actual y subdirectorios.|
+|git diff <archivo>	|Muestra los cambios realizados específicamente en un archivo concreto.|
+|git diff --staged .|	Compara los archivos que ya están en el stage (listos para commit) contra el último commit.|
+|git diff --staged <archivo>|	Igual al anterior, pero filtrado por un archivo específico.|
+|git diff rama1 rama2|	Muestra las diferencias exactas entre dos ramas distintas.|
+## Buenas Prácticas: Limpieza de Ramas
+Es una buena práctica fundamental borrar las ramas locales y remotas una vez que el Pull Request ha sido mergeado exitosamente.
+
+**¿Por qué hacerlo?**
+
+**Claridad:** Evita tener un listado interminable de ramas obsoletas.
+
+**Prevención de errores:** Impide trabajar accidentalmente sobre una rama que ya es historia.
+
+**Orden:** Facilita la navegación en el repositorio para nuevos integrantes del equipo.
+
+**Comandos:**
+
+- Borrar rama local: ```git branch -d <nombre-de-la-rama>```
+- Borrar rama remota: ```git push origin --delete <nombre-de-la-rama>```
